@@ -95,7 +95,7 @@
                         @endif
                     </a>
                     <div class="col-auto my-1">
-                        <a href="/" class="btn btn-outline-primary btn-sm">
+                        <a href="{{ route('main.index') }}" class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-globe me-1"></i> Web Publik
                         </a>
                     </div>

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\StructureOrganization;
+use App\Traits\ModelLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Field extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, ModelLog ,SoftDeletes;
 
     protected $table = 'fields';
     protected $guarded = ['id'];

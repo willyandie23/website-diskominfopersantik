@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class DownloadController extends Controller
@@ -10,9 +11,14 @@ class DownloadController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Media::download()->orderBy('id', 'desc');
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        $downloads = $query->paginate(10);
+        return view('frontend.download.index', compact('downloads'));
     }
 
     /**

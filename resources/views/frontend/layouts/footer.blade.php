@@ -18,10 +18,10 @@
                                 {{-- <li><a href="javascript:void(0);"><i class="fas fa-globe"></i></a></li> --}}
                                 
                                 {{-- Facebook --}}
-                                <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="{{ $site_identity->get('facebook') }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                                 
                                 {{-- Instagram --}}
-                                <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="{{ $site_identity->get('instagram') }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
                                 
                                 {{-- X (Twitter) --}}
                                 {{-- <li><a href="https://twitter.com/dpmptspkatingan"><i class="fab fa-twitter"></i></a></li> --}}

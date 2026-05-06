@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ModelLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class StructureOrganization extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, ModelLog ,SoftDeletes;
 
     protected $table = 'structure_organization';
     protected $guarded = ['id'];
@@ -40,7 +41,7 @@ class StructureOrganization extends Model
     public function getGambarUrlAttribute()
     {
         return $this->gambar 
-            ? Storage::url($this->gambar) 
+            ? asset('storage/' . $this->gambar) 
             : asset('assets/images/Dummy PP.jpg');
     }
 }

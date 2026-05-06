@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\ModelLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class News extends Model
 {
-    use HasFactory;
+    use HasFactory, ModelLog;
 
     protected $table = 'news';
     protected $guarded = ['id'];
@@ -30,9 +31,24 @@ class News extends Model
      */
     public function getImageUrlAttribute()
     {
-        return $this->image 
-            ? Storage::url($this->image) 
-            : asset('assets/images/no-image.png');
+        if (empty($this->image)) {
+            return asset('assets/images/no-image.png');
+        }
+
+        $image = trim($this->image);
+
+        // Case 1: Sudah full path (format baru)
+        if (str_starts_with($image, 'uploads/news/')) {
+            return Storage::url($image);
+        }
+
+        // Case 2: Hanya nama file dengan folder di dalamnya (jarang)
+        if (str_contains($image, 'uploads/news/')) {
+            return Storage::url($image);
+        }
+
+        // Case 3: Format lama (hanya nama file) → tambahkan prefix
+        return Storage::url('uploads/news/' . $image);
     }
 
     /**

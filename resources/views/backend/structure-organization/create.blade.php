@@ -241,10 +241,10 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Golongan</label>
+                            <label class="form-label">NIP</label>
                             <input type="text" name="golongan" class="form-control"
                                    value="{{ old('golongan') }}"
-                                   placeholder="Contoh: III/b">
+                                   placeholder="Contoh: 12344559 32165 0 001">
                         </div>
                     </div>
 

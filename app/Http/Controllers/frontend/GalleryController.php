@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -10,9 +11,14 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Media::gallery()->orderBy('id', 'desc');
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        $galleries = $query->paginate(12);
+        return view('frontend.gallery.index', compact('galleries'));
     }
 
     /**

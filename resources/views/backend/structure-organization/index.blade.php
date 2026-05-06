@@ -288,7 +288,7 @@
                         <th width="60">Foto</th>
                         <th>Nama & Jabatan</th>
                         <th>Bidang</th>
-                        <th>Golongan</th>
+                        <th>NIP</th>
                         <th>Status</th>
                         <th width="100" class="text-center">Aksi</th>
                     </tr>

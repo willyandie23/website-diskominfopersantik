@@ -10,16 +10,50 @@ use App\Http\Controllers\backend\GalleryControler;
 use App\Http\Controllers\backend\IdentityControler;
 use App\Http\Controllers\backend\NewsControler;
 use App\Http\Controllers\backend\StructureOrganizationControler;
+use App\Http\Controllers\frontend\CasesController;
+use App\Http\Controllers\frontend\CctvController;
+use App\Http\Controllers\frontend\ContactController;
+use App\Http\Controllers\frontend\DownloadController;
+use App\Http\Controllers\frontend\GalleryController;
 use App\Http\Controllers\Frontend\MainController;
+use App\Http\Controllers\frontend\NewsController;
+use App\Http\Controllers\frontend\RequestsController;
+use App\Http\Controllers\frontend\StructureOrganizationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // == Frontend Routes ==
+// Dashboard
 Route::get('/', [MainController::class, 'index'])->name('main.index');
 
-// Route::get('/admin/dashboard', [DashboardController::class, 'index'])
-//         ->middleware(['auth', 'verified'])
-//         ->name('dashboard');
+// Berita
+Route::get('/berita', [NewsController::class, 'index'])->name('frontend.news.index');
+Route::get('/berita/{id}', [NewsController::class, 'show'])->name('frontend.news.show');
+
+// Galeri
+Route::get('/galeri', [GalleryController::class, 'index'])->name('frontend.gallery.index');
+
+// Struktur Organisasi
+Route::get('/struktur-organisasi', [StructureOrganizationController::class, 'index'])->name('frontend.structure-organization.index');
+// Bidang
+Route::get('/bidang/{id}', [StructureOrganizationController::class, 'showByField'])->name('frontend.field.show');
+
+// Unduhan
+Route::get('/unduhan', [DownloadController::class, 'index'])->name('frontend.download.index');
+Route::get('/unduhan/file/{media}', [DownloadControler::class, 'downloadFile'])->name('download.file');
+
+// Hubungi Kami
+Route::get('/hubungi-kami', [ContactController::class, 'index'])->name('frontend.contact.index');
+Route::post('/hubungi-kami', [ContactController::class, 'store'])->name('frontend.contact.store');
+
+// Pegajuan
+Route::get('/pengajuan', [RequestsController::class, 'index'])->name('frontend.requests.index');
+
+// Keluhan
+Route::get('/keluhan', [CasesController::class, 'index'])->name('frontend.cases.index');
+
+// CCTV
+Route::get('/cctv', [CctvController::class, 'index'])->name('frontend.cctv.index');
 
 Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
