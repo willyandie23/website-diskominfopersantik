@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\ModelLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Requests extends Model
 {
-    use HasFactory, ModelLog, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'helpdesk_of_requests';
 
@@ -25,9 +26,26 @@ class Requests extends Model
         'deadline_by_requester',
         'assignee',
         'desc',
-        'file_surat_pengantar',
-        'file_addition1',
-        'file_addition2',
-        'file_addition3',
-        ];
+        'file_surat_pengantar',  // wajib
+        'file_addition1',        // opsional
+        'file_addition2',        // opsional
+        'file_addition3',        // opsional
+    ];
+
+    /**
+     * Semua riwayat status dari pengajuan ini.
+     */
+    public function histories(): HasMany
+    {
+        return $this->hasMany(RequestHistory::class, 'ref_id', 'id');
+    }
+
+    /**
+     * Riwayat status terbaru dari pengajuan ini.
+     */
+    public function latestHistory(): HasOne
+    {
+        return $this->hasOne(RequestHistory::class, 'ref_id', 'id')
+                    ->latestOfMany('id');
+    }
 }

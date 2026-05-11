@@ -3,12 +3,14 @@
 // use App\Http\Controllers\Backend\AppLogController;
 // use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\backend\BannerControler;
+use App\Http\Controllers\backend\CasesController as BackendCasesController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\DownloadControler;
 use App\Http\Controllers\backend\FieldControler;
 use App\Http\Controllers\backend\GalleryControler;
 use App\Http\Controllers\backend\IdentityControler;
 use App\Http\Controllers\backend\NewsControler;
+use App\Http\Controllers\backend\RequestsController as BackendRequestsController;
 use App\Http\Controllers\backend\StructureOrganizationControler;
 use App\Http\Controllers\frontend\CasesController;
 use App\Http\Controllers\frontend\CctvController;
@@ -48,9 +50,15 @@ Route::post('/hubungi-kami', [ContactController::class, 'store'])->name('fronten
 
 // Pegajuan
 Route::get('/pengajuan', [RequestsController::class, 'index'])->name('frontend.requests.index');
+Route::post('/pengajuan', [RequestsController::class, 'store'])->name('frontend.requests.store');
+Route::get('/pengajuan/cari', [RequestsController::class, 'track'])->name('frontend.requests.track');
+Route::get('/pengajuan/{id}', [RequestsController::class, 'show'])->name('frontend.requests.show');
 
 // Keluhan
 Route::get('/keluhan', [CasesController::class, 'index'])->name('frontend.cases.index');
+Route::post('/keluhan', [CasesController::class, 'store'])->name('frontend.cases.store');
+Route::get('/keluhan/cari', [CasesController::class, 'track'])->name('frontend.cases.track');
+Route::get('/keluhan/{id}', [CasesController::class, 'show'])->name('frontend.cases.show');
 
 // CCTV
 Route::get('/cctv', [CctvController::class, 'index'])->name('frontend.cctv.index');
@@ -102,6 +110,18 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         # Banner
         Route::get('/admin/banner', [BannerControler::class, 'index'])->name('banner.index');
         Route::resource('/admin/banner', BannerControler::class)->except(['index']);
+
+        # Pengajuan
+        Route::get('/admin/pengajuan', [BackendRequestsController::class, 'index'])->name('requests.index');
+        Route::get('/admin/pengajuan/{id}', [BackendRequestsController::class, 'show'])->name('requests.show');
+        Route::put('/admin/pengajuan/{id}', [BackendRequestsController::class, 'update'])->name('requests.update');
+        Route::delete('/admin/pengajuan/{id}', [BackendRequestsController::class, 'destroy'])->name('requests.destroy');
+
+        # Keluhan
+        Route::get('/admin/keluhan', [BackendCasesController::class, 'index'])->name('cases.index');
+        Route::get('/admin/keluhan/{id}', [BackendCasesController::class, 'show'])->name('cases.show');
+        Route::put('/admin/keluhan/{id}', [BackendCasesController::class, 'update'])->name('cases.update');
+        Route::delete('/admin/keluhan/{id}', [BackendCasesController::class, 'destroy'])->name('cases.destroy');
 });
 
 require __DIR__ . '/auth.php';

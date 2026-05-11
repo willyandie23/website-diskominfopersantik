@@ -58,8 +58,8 @@
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="#">Pengajuan</a></li>
-                        <li class="pc-item"><a class="pc-link" href="#">Keluhan</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{ route('requests.index') }}">Pengajuan</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{ route('cases.index') }}">Keluhan</a></li>
                     </ul>
                 </li>
 

@@ -98,25 +98,25 @@ Breadcrumbs::for('struktur-organisasi.edit', function (BreadcrumbTrail $trail, $
     $trail->push('Edit Organisasi', route('struktur-organisasi.edit', $organizationId));
 });
 
-// logs breadcrumbs
-// Breadcrumbs::for('logs.index', function (BreadcrumbTrail $trail) {
-//     $trail->parent('dashboard');
-//     $trail->push('Daftar Log', route('logs.index'));
-// });
-// Breadcrumbs::for('logs.show', function (BreadcrumbTrail $trail, $logsId) {
-//     $trail->parent('logs.index');
-//     $trail->push('Log Detail', route('logs.show', $logsId));
-// });
+// Requests breadcrumbs
+Breadcrumbs::for('requests.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Daftar Pengajuan', route('requests.index'));
+});
+Breadcrumbs::for('requests.show', function (BreadcrumbTrail $trail, $requestId) {
+    $trail->parent('requests.index');
+    $trail->push('Detail Pengajuan', route('requests.show', $requestId));
+});
 
-// // Contact breadcrumbs
-// Breadcrumbs::for('contact.index', function (BreadcrumbTrail $trail) {
-//     $trail->parent('dashboard');
-//     $trail->push('Daftar Kontak Pesan', route('contact.index'));
-// });
-// Breadcrumbs::for('contact.show', function (BreadcrumbTrail $trail, $contactId) {
-//     $trail->parent('contact.index');
-//     $trail->push('Kontak Pesan Detail', route('contact.show', $contactId));
-// });
+// Cases breadcrumbs
+Breadcrumbs::for('cases.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Daftar Keluhan', route('cases.index'));
+});
+Breadcrumbs::for('cases.show', function (BreadcrumbTrail $trail, $caseId) {
+    $trail->parent('cases.index');
+    $trail->push('Detail Keluhan', route('cases.show', $caseId));
+});
 
 // Profile breadcrumbs
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
