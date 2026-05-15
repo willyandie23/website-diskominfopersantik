@@ -25,7 +25,11 @@ class CasesController extends Controller
             ->whereNull('deleted_at')
             ->get();
 
-        return view('frontend.cases.index', compact('categories', 'statuses'));
+        $cases = Cases::select('id', 'requester_name', 'unit_name', 'title', 'category', 'status')
+        ->latest()
+        ->get();
+
+        return view('frontend.cases.index', compact('categories', 'statuses', 'cases'));
     }
 
     /**

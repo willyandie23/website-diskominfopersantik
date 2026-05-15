@@ -118,6 +118,20 @@ Breadcrumbs::for('cases.show', function (BreadcrumbTrail $trail, $caseId) {
     $trail->push('Detail Keluhan', route('cases.show', $caseId));
 });
 
+// Agenda breadcrumbs
+Breadcrumbs::for('agenda.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Agenda', route('agenda.index'));
+});
+Breadcrumbs::for('agenda.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('agenda.index');
+    $trail->push('Buat Agenda', route('agenda.create'));
+});
+Breadcrumbs::for('agenda.edit', function (BreadcrumbTrail $trail, $agendaId) {
+    $trail->parent('agenda.index');
+    $trail->push('Edit Agenda', route('agenda.edit', $agendaId));
+});
+
 // Profile breadcrumbs
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

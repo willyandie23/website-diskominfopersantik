@@ -5,6 +5,8 @@
 @endsection
 
 @push('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
     <style>
         /* Page Banner */
         .page-banner {
@@ -328,6 +330,37 @@
             margin-left: 6px;
             vertical-align: middle;
         }
+
+        /* DataTable Pagination Primary Color */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: #fff !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: #fff !important;
+        }
+
+        /* Bootstrap Pagination Override (jika pakai Bootstrap pagination) */
+        .page-item.active .page-link {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: #fff !important;
+        }
+
+        .page-link:hover {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: #fff !important;
+        }
+
+        .page-link {
+            color: var(--primary);
+        }
     </style>
 @endpush
 
@@ -381,6 +414,9 @@
                         </button>
                         <button class="tab-btn" id="tab-track-btn" onclick="switchTab('track')">
                             <i class="mdi mdi-magnify me-1"></i> Lacak Status Tiket
+                        </button>
+                        <button class="tab-btn" id="tab-list-btn" onclick="switchTab('list')">
+                            <i class="mdi mdi-format-list-bulleted me-1"></i> Daftar Pengajuan
                         </button>
                     </div>
 
@@ -684,6 +720,60 @@
                         </form>
                     </div>
 
+                    {{-- LIST TAB --}}
+                    <div id="tab-list" class="form-card" style="display:none;">
+                        <h5 class="fw-700 mb-3" style="font-size:18px;">Daftar Pengajuan</h5>
+                        <div class="table-responsive">
+                            <table id="requestsTable" class="table table-striped table-bordered w-100" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Pemohon</th>
+                                        <th>Unit / Instansi</th>
+                                        <th>Judul</th>
+                                        <th>Kategori</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($requests as $i => $req)
+                                        <tr>
+                                            <td>{{ $i + 1 }}</td>
+                                            <td>{{ $req->requester_name }}</td>
+                                            <td>{{ $req->unit_name }}</td>
+                                            <td>
+                                                <a href="{{ route('frontend.requests.show', $req->id) }}" class="text-primary fw-semibold">
+                                                    {{ $req->title }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $catLabel = $categories->firstWhere('value', $req->category);
+                                                @endphp
+                                                {{ $catLabel ? $catLabel->label : $req->category }}
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $statusOption = $statuses->firstWhere('value', $req->status);
+                                                    $badgeColor = match($req->status) {
+                                                        'sent' => '#3b82f6',
+                                                        'on_progress' => '#f59e0b',
+                                                        'done' => '#10b981',
+                                                        'rejected' => '#ef4444',
+                                                        default => '#64748b',
+                                                    };
+                                                @endphp
+                                                <span class="badge" style="background:{{ $badgeColor }}; font-size:11px; padding:5px 10px; border-radius:6px;">
+                                                    {{ $statusOption ? $statusOption->label : ucfirst($req->status) }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
 
                 {{-- RIGHT: Info Panel --}}
@@ -747,24 +837,28 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
         // Tab Switcher
         function switchTab(tab) {
-            const formEl = document.getElementById('tab-form');
-            const trackEl = document.getElementById('tab-track');
-            const formBtn = document.getElementById('tab-form-btn');
-            const trkBtn = document.getElementById('tab-track-btn');
-
-            if (tab === 'form') {
-                formEl.style.display = 'block';
-                trackEl.style.display = 'none';
-                formBtn.classList.add('active');
-                trkBtn.classList.remove('active');
-            } else {
-                formEl.style.display = 'none';
-                trackEl.style.display = 'block';
-                trkBtn.classList.add('active');
-                formBtn.classList.remove('active');
+            const tabs = ['form', 'track', 'list'];
+            tabs.forEach(function(t) {
+                document.getElementById('tab-' + t).style.display = (t === tab) ? 'block' : 'none';
+                document.getElementById('tab-' + t + '-btn').classList.toggle('active', t === tab);
+            });
+            if (tab === 'list' && !$.fn.DataTable.isDataTable('#requestsTable')) {
+                $('#requestsTable').DataTable({
+                    language: {
+                        search: "Cari:",
+                        lengthMenu: "Tampilkan _MENU_ data",
+                        info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                        paginate: { previous: "‹", next: "›" },
+                        zeroRecords: "Tidak ada data ditemukan",
+                        infoEmpty: "Tidak ada data",
+                    }
+                });
             }
         }
 
@@ -772,20 +866,7 @@
         @if ($errors->has('ticket_id'))
             switchTab('track');
         @endif
-        @if (
-            $errors->hasAny([
-                'title',
-                'category',
-                'unit_name',
-                'requester_name',
-                'phone',
-                'email',
-                'desc',
-                'file_surat_pengantar',
-                'file_addition1',
-                'file_addition2',
-                'file_addition3',
-            ]))
+        @if ($errors->hasAny(['title','category','unit_name','requester_name','phone','email','desc','file_surat_pengantar','file_addition1','file_addition2','file_addition3']))
             switchTab('form');
         @endif
 

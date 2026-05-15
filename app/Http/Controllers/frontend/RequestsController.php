@@ -23,8 +23,12 @@ class RequestsController extends Controller
         $statuses = Options::where('type', 'HELPDESK_STATUS')
             ->whereNull('deleted_at')
             ->get();
+        
+        $requests = Requests::select('id', 'requester_name', 'unit_name', 'title', 'category', 'status')
+            ->latest()
+            ->get();
 
-        return view('frontend.requests.index', compact('categories', 'statuses'));
+        return view('frontend.requests.index', compact('categories', 'statuses', 'requests'));
     }
 
     /**

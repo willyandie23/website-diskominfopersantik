@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\Backend\AppLogController;
 // use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\backend\AgendaController;
 use App\Http\Controllers\backend\BannerControler;
 use App\Http\Controllers\backend\CasesController as BackendCasesController;
 use App\Http\Controllers\backend\DashboardController;
@@ -122,6 +123,9 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         Route::get('/admin/keluhan/{id}', [BackendCasesController::class, 'show'])->name('cases.show');
         Route::put('/admin/keluhan/{id}', [BackendCasesController::class, 'update'])->name('cases.update');
         Route::delete('/admin/keluhan/{id}', [BackendCasesController::class, 'destroy'])->name('cases.destroy');
+
+        # Agenda
+        Route::resource('admin/agenda', AgendaController::class)->names('agenda');
 });
 
 require __DIR__ . '/auth.php';

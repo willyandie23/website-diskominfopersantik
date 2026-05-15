@@ -5,6 +5,8 @@
 @endsection
 
 @push('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
     <style>
         .cases-hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark, #003580) 100%);
@@ -330,6 +332,28 @@
         .dz-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
             color: rgba(255, 255, 255, 0.6);
         }
+
+        /* DataTables Bootstrap 5 Pagination - Primary Color */
+        .dataTables_wrapper .pagination .page-item.active .page-link {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: #fff !important;
+        }
+
+        .dataTables_wrapper .pagination .page-item .page-link {
+            color: var(--primary) !important;
+        }
+
+        .dataTables_wrapper .pagination .page-item .page-link:hover {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: #fff !important;
+            opacity: 0.85;
+        }
+
+        .dataTables_wrapper .pagination .page-item .page-link:focus {
+            box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+        }
     </style>
 @endpush
 
@@ -388,10 +412,13 @@
                     {{-- Tab Switcher --}}
                     <div class="tab-switcher">
                         <button class="tab-btn active" id="tab-form-btn" onclick="switchTab('form')">
-                            <i class="mdi mdi-pencil-plus-outline me-1"></i> Ajukan Keluhan Baru
+                            <i class="mdi mdi-pencil-plus-outline me-1"></i> Ajukan Keluhan
                         </button>
                         <button class="tab-btn" id="tab-track-btn" onclick="switchTab('track')">
-                            <i class="mdi mdi-magnify me-1"></i> Lacak Status Tiket
+                            <i class="mdi mdi-magnify me-1"></i> Lacak Tiket
+                        </button>
+                        <button class="tab-btn" id="tab-list-btn" onclick="switchTab('list')">
+                            <i class="mdi mdi-format-list-bulleted me-1"></i> Daftar Keluhan
                         </button>
                     </div>
 
@@ -565,6 +592,63 @@
                         </form>
                     </div>
 
+                    {{-- LIST TAB --}}
+                    <div id="tab-list" class="form-card" style="display:none;">
+                        <h5 class="fw-700 mb-2" style="font-size:18px;">Daftar Keluhan</h5>
+                        <p class="text-muted mb-4" style="font-size:14px;">
+                            Daftar seluruh keluhan yang telah diajukan.
+                        </p>
+                        <div class="table-responsive">
+                            <table id="casesTable" class="table table-striped table-hover w-100" style="font-size:14px;">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Pelapor</th>
+                                        <th>Unit / Instansi</th>
+                                        <th>Judul Keluhan</th>
+                                        <th>Kategori</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($cases as $index => $item)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $item->requester_name }}</td>
+                                            <td>{{ $item->unit_name }}</td>
+                                            <td>
+                                                <a href="{{ route('frontend.cases.show', $item->id) }}" class="text-primary fw-semibold">
+                                                    {{ $item->title }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $catLabel = $categories->firstWhere('value', $item->category);
+                                                @endphp
+                                                {{ $catLabel ? $catLabel->label : $item->category }}
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $statusOption = $statuses->firstWhere('value', $item->status);
+                                                    $badgeColor = match($item->status) {
+                                                        'sent' => '#3b82f6',
+                                                        'on_progress' => '#f59e0b',
+                                                        'done' => '#10b981',
+                                                        'rejected' => '#ef4444',
+                                                        default => '#64748b',
+                                                    };
+                                                @endphp
+                                                <span class="badge" style="background:{{ $badgeColor }}; font-size:11px; padding:5px 10px; border-radius:6px;">
+                                                    {{ $statusOption ? $statusOption->label : ucfirst($item->status) }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
 
                 {{-- RIGHT: Info Panel --}}
@@ -626,24 +710,58 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
         // Tab Switcher
         function switchTab(tab) {
             const formTab = document.getElementById('tab-form');
             const trackTab = document.getElementById('tab-track');
+            const listTab = document.getElementById('tab-list');
             const formBtn = document.getElementById('tab-form-btn');
             const trackBtn = document.getElementById('tab-track-btn');
+            const listBtn = document.getElementById('tab-list-btn');
 
+            // Hide all
+            formTab.style.display = 'none';
+            trackTab.style.display = 'none';
+            listTab.style.display = 'none';
+            formBtn.classList.remove('active');
+            trackBtn.classList.remove('active');
+            listBtn.classList.remove('active');
+
+            // Show selected
             if (tab === 'form') {
                 formTab.style.display = 'block';
-                trackTab.style.display = 'none';
                 formBtn.classList.add('active');
-                trackBtn.classList.remove('active');
-            } else {
-                formTab.style.display = 'none';
+            } else if (tab === 'track') {
                 trackTab.style.display = 'block';
                 trackBtn.classList.add('active');
-                formBtn.classList.remove('active');
+            } else if (tab === 'list') {
+                listTab.style.display = 'block';
+                listBtn.classList.add('active');
+                // Initialize DataTable saat tab pertama kali dibuka
+                if (!$.fn.DataTable.isDataTable('#casesTable')) {
+                    $('#casesTable').DataTable({
+                        language: {
+                            search: "Cari:",
+                            lengthMenu: "Tampilkan _MENU_ data",
+                            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                            infoEmpty: "Tidak ada data",
+                            zeroRecords: "Data tidak ditemukan",
+                            paginate: {
+                                first: "Pertama",
+                                last: "Terakhir",
+                                next: "›",
+                                previous: "‹"
+                            }
+                        },
+                        pageLength: 10,
+                        responsive: true,
+                        order: [[0, 'asc']]
+                    });
+                }
             }
         }
 

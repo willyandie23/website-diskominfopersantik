@@ -36,6 +36,7 @@
                         <li class="pc-item"><a class="pc-link" href="{{ route('news.index') }}">Berita</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{ route('download.index') }}">Unduhan</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{ route('gallery.index') }}">Galeri</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{ route('agenda.index') }}">Agenda</a></li>
                     </ul>
                 </li>
 
