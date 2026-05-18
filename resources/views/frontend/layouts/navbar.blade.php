@@ -56,14 +56,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sub-menu {{ request()->routeIs('frontend.news.index') ? 'active' : '' }}">
-                            <a href="{{ route('frontend.news.index') }}">Berita</a>
-                        </li>
-                        <li class="sub-menu {{ request()->routeIs('frontend.gallery.index') ? 'active' : '' }}">
-                            <a href="{{ route('frontend.gallery.index') }}">Galeri</a>
-                        </li>
-                        <li class="sub-menu {{ request()->routeIs('frontend.download.index') ? 'active' : '' }}">
-                            <a href="{{ route('frontend.download.index') }}">Unduhan</a>
+                        <li class="sub-menu {{ request()->routeIs('frontend.jajak-pendapat.index') ? 'active' : '' }}">
+                            <a href="{{ route('frontend.jajak-pendapat.index') }}">Jajak Pendapat</a>
                         </li>
                         <li class="sub-menu {{ request()->routeIs('frontend.contact.index') ? 'active' : '' }}">
                             <a href="{{ route('frontend.contact.index') }}">Hubungi Kami</a>
@@ -71,6 +65,23 @@
                         <li class="sub-menu {{ request()->routeIs('frontend.cctv.index') ? 'active' : '' }}">
                             <a href="{{ route('frontend.cctv.index') }}">Smart City CCTV</a>
                         </li>
+                        
+                        <li
+                            class="sub-menu-down {{ request()->routeIs('frontend.news.index', 'frontend.news.show', 'frontend.gallery.index', 'frontend.download.index') ? 'active' : '' }}">
+                            <a href="javascript:void(0);">Publikasi</a>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->routeIs('frontend.news.index', 'frontend.news.show') ? 'active' : '' }}">
+                                    <a href="{{ route('frontend.news.index') }}">Berita</a>
+                                </li>
+                                <li class="{{ request()->routeIs('frontend.gallery.index') ? 'active' : '' }}">
+                                    <a href="{{ route('frontend.gallery.index') }}">Galeri</a>
+                                </li>
+                                <li class="{{ request()->routeIs('frontend.download.index') ? 'active' : '' }}">
+                                    <a href="{{ route('frontend.download.index') }}">Unduhan</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li
                             class="sub-menu-down {{ request()->routeIs('frontend.requests.index', 'frontend.cases.index') ? 'active' : '' }}">
                             <a href="javascript:void(0);">Help Desk</a>

@@ -10,7 +10,10 @@ use App\Http\Controllers\backend\DownloadControler;
 use App\Http\Controllers\backend\FieldControler;
 use App\Http\Controllers\backend\GalleryControler;
 use App\Http\Controllers\backend\IdentityControler;
+use App\Http\Controllers\backend\KatalogFaqController;
+use App\Http\Controllers\backend\KatalogLayananController;
 use App\Http\Controllers\backend\NewsControler;
+use App\Http\Controllers\backend\PertanyaanController;
 use App\Http\Controllers\backend\RequestsController as BackendRequestsController;
 use App\Http\Controllers\backend\StructureOrganizationControler;
 use App\Http\Controllers\frontend\CasesController;
@@ -18,6 +21,7 @@ use App\Http\Controllers\frontend\CctvController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\DownloadController;
 use App\Http\Controllers\frontend\GalleryController;
+use App\Http\Controllers\frontend\JajakPendapatController;
 use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\frontend\NewsController;
 use App\Http\Controllers\frontend\RequestsController;
@@ -69,6 +73,10 @@ Route::middleware('auth')->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Jajak Pendapat
+Route::get('/jajak-pendapat', [JajakPendapatController::class, 'index'])->name('frontend.jajak-pendapat.index');
+Route::post('/jajak-pendapat/vote', [JajakPendapatController::class, 'store'])->name('frontend.jajak-pendapat.store');
 
 Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         # Dashboard
@@ -126,6 +134,15 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 
         # Agenda
         Route::resource('admin/agenda', AgendaController::class)->names('agenda');
+
+        # Katalog - Layanan
+        Route::resource('admin/katalog-layanan', KatalogLayananController::class)->names('katalog-layanan');
+
+        # Katalog - FAQ
+        Route::resource('admin/katalog-faq', KatalogFaqController::class)->names('katalog-faq');
+
+        # Pertanyaan
+        Route::resource('admin/pertanyaan', PertanyaanController::class)->names('pertanyaan');
 });
 
 require __DIR__ . '/auth.php';

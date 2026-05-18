@@ -132,6 +132,52 @@ Breadcrumbs::for('agenda.edit', function (BreadcrumbTrail $trail, $agendaId) {
     $trail->push('Edit Agenda', route('agenda.edit', $agendaId));
 });
 
+// Katalog Layanan breadcrumbs
+Breadcrumbs::for('katalog-layanan.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Katalog Layanan', route('katalog-layanan.index'));
+});
+Breadcrumbs::for('katalog-layanan.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('katalog-layanan.index');
+    $trail->push('Tambah Layanan', route('katalog-layanan.create'));
+});
+Breadcrumbs::for('katalog-layanan.edit', function (BreadcrumbTrail $trail, $layananId) {
+    $trail->parent('katalog-layanan.index');
+    $trail->push('Edit Layanan', route('katalog-layanan.edit', $layananId));
+});
+Breadcrumbs::for('katalog-layanan.show', function (BreadcrumbTrail $trail, $layananId) {
+    $trail->parent('katalog-layanan.index');
+    $trail->push('Detail Layanan', route('katalog-layanan.show', $layananId));
+});
+
+# Katalog FAQ breadcrumbs
+Breadcrumbs::for('katalog-faq.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Katalog FAQ', route('katalog-faq.index'));
+});
+Breadcrumbs::for('katalog-faq.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('katalog-faq.index');
+    $trail->push('Tambah FAQ', route('katalog-faq.create'));
+});
+Breadcrumbs::for('katalog-faq.edit', function (BreadcrumbTrail $trail, $faqId) {
+    $trail->parent('katalog-faq.index');
+    $trail->push('Edit FAQ', route('katalog-faq.edit', $faqId));
+});
+
+# Pertanyaan breadcrumbs
+Breadcrumbs::for('pertanyaan.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Pertanyaan', route('pertanyaan.index'));
+});
+Breadcrumbs::for('pertanyaan.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('pertanyaan.index');
+    $trail->push('Tambah Pertanyaan', route('pertanyaan.create'));
+});
+Breadcrumbs::for('pertanyaan.edit', function (BreadcrumbTrail $trail, $pertanyaanId) {
+    $trail->parent('pertanyaan.index');
+    $trail->push('Edit Pertanyaan', route('pertanyaan.edit', $pertanyaanId));
+});
+
 // Profile breadcrumbs
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

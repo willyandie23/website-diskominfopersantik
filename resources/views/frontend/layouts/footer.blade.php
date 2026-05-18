@@ -44,9 +44,6 @@
                         </div>
                         <ul class="list-1">
                             <li class="cat-item"><a href="https://portal.katingankab.go.id/" target="_blank">Portal Katingan</a></li>
-                            {{-- <li class="cat-item"><a href="https://oss.go.id/id" target="_blank">OSS</a></li>
-                            <li class="cat-item"><a href="https://oss.go.id/id/kbli" target="_blank">KBLI</a></li>
-                            <li class="cat-item"><a href="https://regionalinvestment.bkpm.go.id/" target="_blank">PIR</a></li> --}}
                         </ul>
                     </div>
                 </div>
