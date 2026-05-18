@@ -22,6 +22,7 @@ use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\DownloadController;
 use App\Http\Controllers\frontend\GalleryController;
 use App\Http\Controllers\frontend\JajakPendapatController;
+use App\Http\Controllers\frontend\KatalogLayananController as FrontendKatalogLayananController;
 use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\frontend\NewsController;
 use App\Http\Controllers\frontend\RequestsController;
@@ -77,6 +78,9 @@ Route::middleware('auth')->group(function () {
 // Jajak Pendapat
 Route::get('/jajak-pendapat', [JajakPendapatController::class, 'index'])->name('frontend.jajak-pendapat.index');
 Route::post('/jajak-pendapat/vote', [JajakPendapatController::class, 'store'])->name('frontend.jajak-pendapat.store');
+
+// Katalog Layanan
+Route::get('/katalog-layanan', [FrontendKatalogLayananController::class, 'index'])->name('frontend.katalog-layanan.index');
 
 Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         # Dashboard

@@ -59,6 +59,9 @@
                         <li class="sub-menu {{ request()->routeIs('frontend.jajak-pendapat.index') ? 'active' : '' }}">
                             <a href="{{ route('frontend.jajak-pendapat.index') }}">Jajak Pendapat</a>
                         </li>
+                        <li class="sub-menu {{ request()->routeIs('frontend.katalog-layanan.index') ? 'active' : '' }}">
+                            <a href="{{ route('frontend.katalog-layanan.index') }}">Katalog Layanan</a>
+                        </li>
                         <li class="sub-menu {{ request()->routeIs('frontend.contact.index') ? 'active' : '' }}">
                             <a href="{{ route('frontend.contact.index') }}">Hubungi Kami</a>
                         </li>
