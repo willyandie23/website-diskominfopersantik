@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    CCTV - DISKOMINFOPERSANTIK
+    CCTV - DISKOMINFOSANTIK
 @endsection
 
 @push('css')
@@ -12,9 +12,11 @@
             height: 750px;
             border: 2px solid #0d6efd;
         }
+
         .video-popup {
             min-width: 320px;
         }
+
         .hls-video {
             width: 100%;
             max-width: 480px;
@@ -24,15 +26,15 @@
 @endpush
 
 @section('content')
-<div class="page-content bg-white">
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-12">
-                <div id="map"></div>
+    <div class="page-content bg-white">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12">
+                    <div id="map"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('scripts')

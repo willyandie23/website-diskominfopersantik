@@ -59,7 +59,8 @@
                         <li class="sub-menu {{ request()->routeIs('frontend.jajak-pendapat.index') ? 'active' : '' }}">
                             <a href="{{ route('frontend.jajak-pendapat.index') }}">Jajak Pendapat</a>
                         </li>
-                        <li class="sub-menu {{ request()->routeIs('frontend.katalog-layanan.index') ? 'active' : '' }}">
+                        <li
+                            class="sub-menu {{ request()->routeIs('frontend.katalog-layanan.index') ? 'active' : '' }}">
                             <a href="{{ route('frontend.katalog-layanan.index') }}">Katalog Layanan</a>
                         </li>
                         <li class="sub-menu {{ request()->routeIs('frontend.contact.index') ? 'active' : '' }}">
@@ -68,12 +69,13 @@
                         <li class="sub-menu {{ request()->routeIs('frontend.cctv.index') ? 'active' : '' }}">
                             <a href="{{ route('frontend.cctv.index') }}">Smart City CCTV</a>
                         </li>
-                        
+
                         <li
                             class="sub-menu-down {{ request()->routeIs('frontend.news.index', 'frontend.news.show', 'frontend.gallery.index', 'frontend.download.index') ? 'active' : '' }}">
                             <a href="javascript:void(0);">Publikasi</a>
                             <ul class="sub-menu">
-                                <li class="{{ request()->routeIs('frontend.news.index', 'frontend.news.show') ? 'active' : '' }}">
+                                <li
+                                    class="{{ request()->routeIs('frontend.news.index', 'frontend.news.show') ? 'active' : '' }}">
                                     <a href="{{ route('frontend.news.index') }}">Berita</a>
                                 </li>
                                 <li class="{{ request()->routeIs('frontend.gallery.index') ? 'active' : '' }}">

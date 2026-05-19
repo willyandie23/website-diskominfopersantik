@@ -3,7 +3,6 @@
 @section('title', 'Admin - Daftar Banner')
 
 @push('styles')
-    
     <style>
         .page-header-banner {
             background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 60%, #1a8cff 100%);
@@ -233,7 +232,6 @@
             justify-content: center;
         }
     </style>
-
 @endpush
 
 @section('content')

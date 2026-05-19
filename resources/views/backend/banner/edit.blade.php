@@ -3,7 +3,6 @@
 @section('title', 'Admin - Edit Banner')
 
 @push('styles')
-
     <style>
         .page-header-banner {
             background: linear-gradient(135deg, #7c3d12 0%, #c2611f 60%, #f97316 100%);
@@ -329,7 +328,6 @@
             color: #94a3b8;
         }
     </style>
-
 @endpush
 
 @section('content')
@@ -423,7 +421,8 @@
                                     @else
                                         <div
                                             style="width:120px;height:75px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                                            <i class="fas fa-image text-muted"></i></div>
+                                            <i class="fas fa-image text-muted"></i>
+                                        </div>
                                     @endif
                                 </div>
                                 <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>

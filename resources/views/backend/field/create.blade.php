@@ -125,7 +125,7 @@
             <h4><i class="fas fa-plus-circle me-3"></i>Tambah Bidang Baru</h4>
             <p class="text-white mb-0">Lengkapi informasi bidang / bagian kantor.</p>
         </div>
-        
+
         <!-- Button Kembali yang sudah aman -->
         <a href="{{ route('field.index') }}" class="btn-back">
             <i class="fas fa-arrow-left"></i> Kembali
@@ -141,12 +141,9 @@
                     <label for="nama_bidang" class="form-label-modern">
                         Nama Bidang <span class="text-danger">*</span>
                     </label>
-                    <input type="text"
-                           name="nama_bidang"
-                           id="nama_bidang"
-                           class="form-control form-control-modern @error('nama_bidang') is-invalid @enderror"
-                           value="{{ old('nama_bidang') }}"
-                           required>
+                    <input type="text" name="nama_bidang" id="nama_bidang"
+                        class="form-control form-control-modern @error('nama_bidang') is-invalid @enderror"
+                        value="{{ old('nama_bidang') }}" required>
                     @error('nama_bidang')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -156,10 +153,8 @@
                     <label for="deskripsi_bidang" class="form-label-modern">
                         Deskripsi Bidang
                     </label>
-                    <textarea name="deskripsi_bidang"
-                              id="deskripsi_bidang"
-                              class="form-control form-control-modern @error('deskripsi_bidang') is-invalid @enderror"
-                              rows="8">{{ old('deskripsi_bidang') }}</textarea>
+                    <textarea name="deskripsi_bidang" id="deskripsi_bidang"
+                        class="form-control form-control-modern @error('deskripsi_bidang') is-invalid @enderror" rows="8">{{ old('deskripsi_bidang') }}</textarea>
                     @error('deskripsi_bidang')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -182,24 +177,24 @@
 @endsection
 
 @push('scripts')
-<script>
-    ClassicEditor
-        .create(document.querySelector('#deskripsi_bidang'), {
-            toolbar: {
-                items: [
-                    'heading', '|',
-                    'bold', 'italic', 'underline',
-                    'bulletedList', 'numberedList',
-                    'outdent', 'indent', '|',
-                    'link', 'blockQuote', 'insertTable',
-                    'undo', 'redo'
-                ],
-                shouldNotGroupWhenFull: true
-            },
-            language: 'id'
-        })
-        .catch(error => {
-            console.error(error);
-        });
-</script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#deskripsi_bidang'), {
+                toolbar: {
+                    items: [
+                        'heading', '|',
+                        'bold', 'italic', 'underline',
+                        'bulletedList', 'numberedList',
+                        'outdent', 'indent', '|',
+                        'link', 'blockQuote', 'insertTable',
+                        'undo', 'redo'
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+                language: 'id'
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endpush

@@ -85,7 +85,7 @@
 
         #fieldTable tbody tr {
             transition: all 0.25s ease;
-            padding: 16px 20px; 
+            padding: 16px 20px;
         }
 
         #fieldTable tbody tr:hover {
@@ -137,7 +137,7 @@
 
 @section('content')
 
-    <!-- Page Header Modern -->
+    <!-- Page Header -->
     <div class="page-header-bidang d-flex justify-content-between align-items-center flex-wrap gap-4">
         <div style="position: relative; z-index: 1;">
             <h4><i class="fas fa-sitemap me-3"></i>Daftar Bidang</h4>
@@ -173,19 +173,15 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('bidang.edit', $field) }}"
-                                       class="btn-action btn-warning me-2"
-                                       title="Edit">
+                                    <a href="{{ route('bidang.edit', $field) }}" class="btn-action btn-warning me-2"
+                                        title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('bidang.destroy', $field) }}"
-                                          method="POST"
-                                          class="d-inline form-delete-bidang">
+                                    <form action="{{ route('bidang.destroy', $field) }}" method="POST"
+                                        class="d-inline form-delete-bidang">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn-action btn-danger"
-                                                title="Hapus">
+                                        <button type="submit" class="btn-action btn-danger" title="Hapus">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
@@ -212,47 +208,49 @@
 @endsection
 
 @push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        new DataTable('#fieldTable', {
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/id.json'
-            },
-            pageLength: 15,
-            lengthMenu: [10, 15, 25, 50, 100],
-            // order: [[1, 'asc']],
-            responsive: true,
-            columnDefs: [
-                {
-                    targets: 0,
-                    orderable: false,
-                    render: (data, type, row, meta) => meta.row + 1
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new DataTable('#fieldTable', {
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/id.json'
                 },
-                { targets: 3, orderable: false }
-            ]
-        });
-
-        // SweetAlert Konfirmasi Hapus
-        document.querySelectorAll('.form-delete-bidang').forEach(function (form) {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Yakin hapus bidang ini?',
-                    text: 'Aksi ini tidak bisa dibatalkan.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#e11d48',
-                    cancelButtonColor: '#64748b',
-                    confirmButtonText: '<i class="fas fa-trash-alt"></i> Ya, Hapus',
-                    cancelButtonText: 'Batal',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
+                pageLength: 15,
+                lengthMenu: [10, 15, 25, 50, 100],
+                // order: [[1, 'asc']],
+                responsive: true,
+                columnDefs: [{
+                        targets: 0,
+                        orderable: false,
+                        render: (data, type, row, meta) => meta.row + 1
+                    },
+                    {
+                        targets: 3,
+                        orderable: false
                     }
+                ]
+            });
+
+            // SweetAlert Konfirmasi Hapus
+            document.querySelectorAll('.form-delete-bidang').forEach(function(form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Yakin hapus bidang ini?',
+                        text: 'Aksi ini tidak bisa dibatalkan.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#e11d48',
+                        cancelButtonColor: '#64748b',
+                        confirmButtonText: '<i class="fas fa-trash-alt"></i> Ya, Hapus',
+                        cancelButtonText: 'Batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
                 });
             });
         });
-    });
-</script>
+    </script>
 @endpush

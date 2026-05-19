@@ -3,7 +3,6 @@
 @section('title', 'Admin - Tambah Berita')
 
 @push('styles')
-    
     <style>
         .page-header-news {
             background: linear-gradient(135deg, #0f4c2a 0%, #1a7a47 60%, #22c55e 100%);
@@ -294,7 +293,6 @@
             color: #475569;
         }
     </style>
-
 @endpush
 
 @section('content')
@@ -410,8 +408,10 @@
                 <div class="card-body p-4">
                     <p class="form-section-title mb-3"><i class="fas fa-image me-1"></i> Panduan Gambar</p>
                     <ul class="list-unstyled mb-0" style="font-size:0.83rem;color:#374151;line-height:2;">
-                        <li><i class="fas fa-info-circle text-primary me-2"></i>Rasio <strong>1:1</strong> atau <strong>16:9</strong>
-                        <li><i class="fas fa-info-circle text-primary me-2"></i>Resolusi min. <strong>1080x1080px</strong> atau <strong>1920x1080px</strong>
+                        <li><i class="fas fa-info-circle text-primary me-2"></i>Rasio <strong>1:1</strong> atau
+                            <strong>16:9</strong>
+                        <li><i class="fas fa-info-circle text-primary me-2"></i>Resolusi min. <strong>1080x1080px</strong>
+                            atau <strong>1920x1080px</strong>
                         </li>
                         <li><i class="fas fa-info-circle text-primary me-2"></i>Format: JPG, PNG, WEBP</li>
                         <li><i class="fas fa-info-circle text-primary me-2"></i>Ukuran maks <strong>5MB</strong></li>

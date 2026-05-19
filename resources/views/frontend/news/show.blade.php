@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    {{ $newsItem->title }} - DISKOMINFOPERSANTIK
+    {{ $newsItem->title }} - DISKOMINFOSANTIK
 @endsection
 
 @push('css')

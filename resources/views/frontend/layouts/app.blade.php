@@ -17,14 +17,14 @@
 
     <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <title>@yield('title', 'DISKOMINFOPERSANTIK')</title>
 
     {{-- <link rel="icon" href="{{ asset('frontend/images/favicon.png') }}" type="image/x-icon"> --}}
     <link rel="icon" type="image/png"
         href="{{ $site_identity->get('favicon')
-                ? Storage::url($site_identity->get('favicon'))
-                : asset('frontend/images/favicon.png') }}">
+            ? Storage::url($site_identity->get('favicon'))
+            : asset('frontend/images/favicon.png') }}">
 
     <!-- Stylesheet -->
     {{-- <link href="vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet"> --}}
@@ -54,11 +54,10 @@
             overflow-y: hidden;
         }
 
-        .sub-menu li.active > a {
+        .sub-menu li.active>a {
             color: var(--primary) !important;
             font-weight: 600;
         }
-
     </style>
 
     @stack('css')

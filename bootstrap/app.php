@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\TrackVisitor;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'auth:api' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class
-        ]);
+            ]);
+        $middleware->appendToGroup('web', TrackVisitor::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

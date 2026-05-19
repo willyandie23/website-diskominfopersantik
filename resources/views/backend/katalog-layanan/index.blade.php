@@ -403,40 +403,59 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            new DataTable('#layananTable', {
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/id.json'
+<script>
+    $(document).ready(function() {
+        $('#layananTable').DataTable({
+            language: {
+                processing:     "Sedang memproses...",
+                search:         "Cari:",
+                lengthMenu:     "Tampilkan _MENU_ data per halaman",
+                info:           "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                infoEmpty:      "Menampilkan 0 sampai 0 dari 0 data",
+                infoFiltered:   "(disaring dari _MAX_ total data)",
+                zeroRecords:    "Tidak ditemukan data yang sesuai",
+                emptyTable:     "Tidak ada data tersedia",
+                paginate: {
+                    first:      "Pertama",
+                    previous:   "Sebelumnya",
+                    next:       "Berikutnya",
+                    last:       "Terakhir"
                 },
-                pageLength: 15,
-                lengthMenu: [10, 15, 25, 50, 100],
-                responsive: true,
-                // columnDefs: [
-                //     { orderable: false, targets: [0, 1, 5] }
-                // ]
-            });
+                aria: {
+                    sortAscending:  ": aktifkan untuk mengurutkan kolom naik",
+                    sortDescending: ": aktifkan untuk mengurutkan kolom turun"
+                }
+            },
+            pageLength: 15,
+            lengthMenu: [10, 15, 25, 50, 100],
+            responsive: true,
+            order: [[0, 'asc']],                    // urutkan berdasarkan Tanggal Dibuat (kolom ke-5)
+            columnDefs: [
+                { orderable: false, targets: [0, 1, 5] }   // No, Gambar, dan Aksi tidak boleh diurut
+            ]
+        });
 
-            document.querySelectorAll('.form-delete-layanan').forEach(function(form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    Swal.fire({
-                        title: 'Hapus layanan ini?',
-                        text: 'Data yang dihapus tidak dapat dikembalikan.',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#e11d48',
-                        cancelButtonColor: '#94a3b8',
-                        confirmButtonText: '<i class="fas fa-trash-alt me-1"></i> Ya, Hapus',
-                        cancelButtonText: 'Batal',
-                        reverseButtons: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
-                        }
-                    });
+        // Konfirmasi hapus dengan SweetAlert
+        document.querySelectorAll('.form-delete-layanan').forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Hapus layanan ini?',
+                    text: 'Data yang dihapus tidak dapat dikembalikan.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e11d48',
+                    cancelButtonColor: '#94a3b8',
+                    confirmButtonText: '<i class="fas fa-trash-alt me-1"></i> Ya, Hapus',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
                 });
             });
         });
-    </script>
+    });
+</script>
 @endpush

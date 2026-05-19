@@ -178,6 +178,16 @@ Breadcrumbs::for('pertanyaan.edit', function (BreadcrumbTrail $trail, $pertanyaa
     $trail->push('Edit Pertanyaan', route('pertanyaan.edit', $pertanyaanId));
 });
 
+// App Log breadcrumbs
+Breadcrumbs::for('app-log.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('App Log', route('app-log.index'));
+});
+Breadcrumbs::for('app-log.show', function (BreadcrumbTrail $trail, $logId) {
+    $trail->parent('app-log.index');
+    $trail->push('Detail Log', route('app-log.show', $logId));
+});
+
 // Profile breadcrumbs
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

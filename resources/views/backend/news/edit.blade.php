@@ -3,7 +3,6 @@
 @section('title', 'Admin - Edit Berita')
 
 @push('styles')
-
     <style>
         .page-header-news {
             background: linear-gradient(135deg, #713f12 0%, #a16207 60%, #eab308 100%);
@@ -342,7 +341,6 @@
             color: #475569;
         }
     </style>
-
 @endpush
 
 @section('content')
@@ -432,7 +430,8 @@
                                     @else
                                         <div
                                             style="width:130px;height:80px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                                            <i class="fas fa-image text-muted"></i></div>
+                                            <i class="fas fa-image text-muted"></i>
+                                        </div>
                                     @endif
                                 </div>
                                 <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>

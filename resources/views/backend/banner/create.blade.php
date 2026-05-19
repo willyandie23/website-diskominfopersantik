@@ -3,7 +3,6 @@
 @section('title', 'Admin - Tambah Banner')
 
 @push('styles')
-
     <style>
         .page-header-banner {
             background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 60%, #1a8cff 100%);
@@ -263,7 +262,6 @@
             color: #e11d48;
         }
     </style>
-
 @endpush
 
 @section('content')
@@ -361,7 +359,8 @@
                     <ul class="list-unstyled mb-0" style="font-size:0.83rem;color:#475569;line-height:1.9;">
                         <li><i class="fas fa-check-circle text-success me-2"></i>Gunakan rasio <strong>16:9</strong></li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Resolusi minimal
-                            <strong>1280×720px</strong></li>
+                            <strong>1280×720px</strong>
+                        </li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Format JPG/PNG/WEBP</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Ukuran maks <strong>5MB</strong></li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Hindari teks terlalu kecil di gambar</li>

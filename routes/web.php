@@ -1,8 +1,7 @@
 <?php
 
-// use App\Http\Controllers\Backend\AppLogController;
-// use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\backend\AgendaController;
+use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\backend\BannerControler;
 use App\Http\Controllers\backend\CasesController as BackendCasesController;
 use App\Http\Controllers\backend\DashboardController;
@@ -147,6 +146,10 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 
         # Pertanyaan
         Route::resource('admin/pertanyaan', PertanyaanController::class)->names('pertanyaan');
+
+        # App Log
+        Route::get('/admin/app-log', [AppLogController::class, 'index'])->name('app-log.index');
+        Route::get('/admin/app-log/{id}', [AppLogController::class, 'show'])->name('app-log.show');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    Galeri - DISKOMINFOPERSANTIK
+    Galeri - DISKOMINFOSANTIK
 @endsection
 
 @push('css')

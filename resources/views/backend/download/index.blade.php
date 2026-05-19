@@ -3,7 +3,6 @@
 @section('title', 'Admin - Daftar Unduhan')
 
 @push('styles')
-
     <style>
         .page-header-download {
             background: linear-gradient(135deg, #0f4c3a 0%, #1a7a5a 60%, #22c55e 100%);
@@ -265,7 +264,6 @@
             color: #86efac;
         }
     </style>
-
 @endpush
 
 @section('content')
@@ -392,7 +390,6 @@
 @endsection
 
 @push('scripts')
-    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const table = new DataTable('#downloadTable', {
@@ -437,5 +434,4 @@
             });
         });
     </script>
-
 @endpush

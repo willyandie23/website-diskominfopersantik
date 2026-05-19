@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    Tiket #{{ $requestData->id }} - Pengajuan DISKOMINFOPERSANTIK
+    Tiket #{{ $requestData->id }} - Pengajuan DISKOMINFOSANTIK
 @endsection
 
 @push('css')

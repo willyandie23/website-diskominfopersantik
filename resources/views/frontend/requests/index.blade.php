@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    Pengajuan - DISKOMINFOPERSANTIK
+    Pengajuan - DISKOMINFOSANTIK
 @endsection
 
 @push('css')
@@ -724,7 +724,8 @@
                     <div id="tab-list" class="form-card" style="display:none;">
                         <h5 class="fw-700 mb-3" style="font-size:18px;">Daftar Pengajuan</h5>
                         <div class="table-responsive">
-                            <table id="requestsTable" class="table table-striped table-bordered w-100" style="font-size:13px;">
+                            <table id="requestsTable" class="table table-striped table-bordered w-100"
+                                style="font-size:13px;">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -742,9 +743,7 @@
                                             <td>{{ $req->requester_name }}</td>
                                             <td>{{ $req->unit_name }}</td>
                                             <td>
-                                                <a href="{{ route('frontend.requests.show', $req->id) }}" class="text-primary fw-semibold">
-                                                    {{ $req->title }}
-                                                </a>
+                                                {{ $req->title }}
                                             </td>
                                             <td>
                                                 @php
@@ -755,7 +754,7 @@
                                             <td>
                                                 @php
                                                     $statusOption = $statuses->firstWhere('value', $req->status);
-                                                    $badgeColor = match($req->status) {
+                                                    $badgeColor = match ($req->status) {
                                                         'sent' => '#3b82f6',
                                                         'on_progress' => '#f59e0b',
                                                         'done' => '#10b981',
@@ -763,7 +762,8 @@
                                                         default => '#64748b',
                                                     };
                                                 @endphp
-                                                <span class="badge" style="background:{{ $badgeColor }}; font-size:11px; padding:5px 10px; border-radius:6px;">
+                                                <span class="badge"
+                                                    style="background:{{ $badgeColor }}; font-size:11px; padding:5px 10px; border-radius:6px;">
                                                     {{ $statusOption ? $statusOption->label : ucfirst($req->status) }}
                                                 </span>
                                             </td>
@@ -819,7 +819,7 @@
                             <p class="text-muted mb-3" style="font-size:13px;">
                                 Jika mengalami kendala dalam pengisian form, hubungi kami melalui:
                             </p>
-                            <a href="https://wa.me/628115221321" target="_blank"
+                            <a href="https://wa.me/{{ $site_identity->get('office_phone') }}" target="_blank"
                                 class="btn d-flex align-items-center justify-content-center gap-2 w-100"
                                 style="background:#25D366; color:#fff; border-radius:10px;
                                    font-weight:600; font-size:14px;">
@@ -854,7 +854,10 @@
                         search: "Cari:",
                         lengthMenu: "Tampilkan _MENU_ data",
                         info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-                        paginate: { previous: "‹", next: "›" },
+                        paginate: {
+                            previous: "‹",
+                            next: "›"
+                        },
                         zeroRecords: "Tidak ada data ditemukan",
                         infoEmpty: "Tidak ada data",
                     }
@@ -866,7 +869,20 @@
         @if ($errors->has('ticket_id'))
             switchTab('track');
         @endif
-        @if ($errors->hasAny(['title','category','unit_name','requester_name','phone','email','desc','file_surat_pengantar','file_addition1','file_addition2','file_addition3']))
+        @if (
+            $errors->hasAny([
+                'title',
+                'category',
+                'unit_name',
+                'requester_name',
+                'phone',
+                'email',
+                'desc',
+                'file_surat_pengantar',
+                'file_addition1',
+                'file_addition2',
+                'file_addition3',
+            ]))
             switchTab('form');
         @endif
 

@@ -3,16 +3,17 @@
 @section('title', 'Admin - Dashboard')
 
 @push('css')
-
     <style>
         .stat-card {
             transition: all 0.25s ease;
             border-radius: .75rem;
         }
+
         .stat-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
         }
+
         .stat-icon {
             width: 3rem;
             height: 3rem;
@@ -22,6 +23,7 @@
             justify-content: center;
             background-color: rgba(15, 23, 42, 0.03);
         }
+
         .stat-label {
             font-size: .8rem;
             letter-spacing: .05em;
@@ -29,17 +31,18 @@
             color: #6c757d;
             margin-bottom: .25rem;
         }
+
         .stat-value {
             font-size: 1.75rem;
             font-weight: 600;
             margin: 0;
         }
+
         .card-header-borderless {
             border-bottom: 0;
             padding-bottom: 0;
         }
     </style>
-
 @endpush
 
 @section('content')
@@ -114,12 +117,6 @@
                         <h5 class="mb-1">Statistik Pengunjung 30 Hari Terakhir</h5>
                         <small class="text-muted">Performa trafik harian website Anda.</small>
                     </div>
-                    {{-- Contoh filter kecil di kanan --}}
-                    {{-- <select class="form-select form-select-sm w-auto">
-                        <option>30 Hari</option>
-                        <option>7 Hari</option>
-                        <option>Hari ini</option>
-                    </select> --}}
                 </div>
                 <div class="card-body pt-3">
                     <div style="height: 320px;">
@@ -133,86 +130,86 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('visitorChart').getContext('2d');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('visitorChart').getContext('2d');
 
-        const labels = @json($chartLabels);
-        const dataValues = @json($chartData);
+            const labels = @json($chartLabels);
+            const dataValues = @json($chartData);
 
-        // Gradient background
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, 'rgba(13, 110, 253, 0.25)');
-        gradient.addColorStop(1, 'rgba(13, 110, 253, 0)');
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(13, 110, 253, 0.25)');
+            gradient.addColorStop(1, 'rgba(13, 110, 253, 0)');
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Jumlah Pengunjung',
-                    data: dataValues,
-                    borderColor: '#0d6efd',
-                    backgroundColor: gradient,
-                    borderWidth: 2.5,
-                    pointRadius: 3,
-                    pointHoverRadius: 5,
-                    pointBackgroundColor: '#0d6efd',
-                    tension: 0.35,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Pengunjung',
+                        data: dataValues,
+                        borderColor: '#0d6efd',
+                        backgroundColor: gradient,
+                        borderWidth: 2.5,
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: '#0d6efd',
+                        tension: 0.35,
+                        fill: true
+                    }]
                 },
-                plugins: {
-                    legend: {
-                        display: false
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
                     },
-                    tooltip: {
-                        backgroundColor: '#111827',
-                        titleColor: '#f9fafb',
-                        bodyColor: '#e5e7eb',
-                        padding: 10,
-                        displayColors: false,
-                        callbacks: {
-                            title: function (items) {
-                                return 'Tanggal: ' + items[0].label;
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#111827',
+                            titleColor: '#f9fafb',
+                            bodyColor: '#e5e7eb',
+                            padding: 10,
+                            displayColors: false,
+                            callbacks: {
+                                title: function(items) {
+                                    return 'Tanggal: ' + items[0].label;
+                                },
+                                label: function(item) {
+                                    return 'Pengunjung: ' + item.formattedValue;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9'
                             },
-                            label: function (item) {
-                                return 'Pengunjung: ' + item.formattedValue;
+                            ticks: {
+                                stepSize: 1,
+                                color: '#6b7280'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6b7280'
                             }
                         }
                     }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#f1f5f9'
-                        },
-                        ticks: {
-                            stepSize: 1,
-                            color: '#6b7280'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#6b7280'
-                        }
-                    }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
 @endpush

@@ -17,6 +17,7 @@ class IdentityControler extends Controller
         'favicon',
         'instagram',
         'facebook',
+        'youtube_url',
         'office_address',
         'office_phone',
         'office_email',
@@ -50,6 +51,7 @@ class IdentityControler extends Controller
             'favicon'        => 'nullable|image|mimes:png,jpg,jpeg,ico,svg|max:2048',
             'instagram'      => 'nullable|url|max:255',
             'facebook'       => 'nullable|url|max:255',
+            'youtube_url'    => 'nullable|url|max:255',
             'office_address' => 'nullable|string|max:500',
             'office_phone'   => 'nullable|string|max:30',
             'office_email'   => 'nullable|email|max:255',
@@ -63,6 +65,7 @@ class IdentityControler extends Controller
             'favicon.max'         => 'Ukuran favicon maksimal 2 MB.',
             'instagram.url'       => 'Link Instagram harus berupa URL yang valid.',
             'facebook.url'        => 'Link Facebook harus berupa URL yang valid.',
+            'youtube_url.url'     => 'Link YouTube harus berupa URL yang valid.',
             'office_email.email'  => 'Email kantor harus berupa alamat email yang valid.',
         ]);
 

@@ -3,7 +3,6 @@
 @section('title', 'Admin - Daftar Berita')
 
 @push('styles')
-
     <style>
         .page-header-news {
             background: linear-gradient(135deg, #0f4c2a 0%, #1a7a47 60%, #22c55e 100%);
@@ -269,7 +268,6 @@
             color: #94a3b8;
         }
     </style>
-
 @endpush
 
 @section('content')

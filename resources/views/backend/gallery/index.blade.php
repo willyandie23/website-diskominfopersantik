@@ -3,7 +3,6 @@
 @section('title', 'Admin - Daftar Gallery')
 
 @push('styles')
-
     <style>
         /* ── Page Header ── */
         .page-header-galeri {
@@ -15,46 +14,60 @@
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(14, 103, 168, 0.22);
         }
+
         .page-header-galeri::before {
             content: '';
             position: absolute;
-            top: -50px; right: -50px;
-            width: 220px; height: 220px;
-            background: rgba(255,255,255,0.06);
+            top: -50px;
+            right: -50px;
+            width: 220px;
+            height: 220px;
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 50%;
         }
+
         .page-header-galeri::after {
             content: '';
             position: absolute;
-            bottom: -70px; right: 100px;
-            width: 160px; height: 160px;
-            background: rgba(255,255,255,0.04);
+            bottom: -70px;
+            right: 100px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 50%;
         }
+
         .page-header-galeri .header-icon-wrap {
-            width: 52px; height: 52px;
-            background: rgba(255,255,255,0.15);
+            width: 52px;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #fff;
             flex-shrink: 0;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .page-header-galeri h4 {
             color: #fff;
             font-weight: 700;
             font-size: 1.3rem;
             margin-bottom: 3px;
         }
+
         .page-header-galeri p {
-            color: rgba(255,255,255,0.72);
+            color: rgba(255, 255, 255, 0.72);
             font-size: 0.87rem;
             margin: 0;
         }
+
         .header-stats-badge {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 10px;
             padding: 5px 14px;
             color: #fff;
@@ -66,6 +79,7 @@
             backdrop-filter: blur(4px);
             margin-top: 8px;
         }
+
         .btn-add-galeri {
             background: #fff;
             color: #1a5fa8;
@@ -77,18 +91,21 @@
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
             transition: all 0.2s ease;
             text-decoration: none;
             white-space: nowrap;
-            position: relative; z-index: 1;
+            position: relative;
+            z-index: 1;
         }
+
         .btn-add-galeri:hover {
             background: #e0f0ff;
             color: #0d4a8a;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
+
         .btn-add-galeri i {
             font-size: 0.82rem;
         }
@@ -97,9 +114,10 @@
         .galeri-card {
             border: none;
             border-radius: 16px;
-            box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.07);
             overflow: hidden;
         }
+
         .galeri-card .card-body {
             padding: 24px;
         }
@@ -115,13 +133,16 @@
             border: none;
             padding: 13px 16px;
         }
+
         #galleryTable tbody tr {
             border-bottom: 1px solid #f1f5f9;
             transition: background 0.15s;
         }
+
         #galleryTable tbody tr:hover {
             background: #f5f9ff;
         }
+
         #galleryTable tbody td {
             padding: 13px 16px;
             vertical-align: middle;
@@ -134,20 +155,23 @@
             position: relative;
             display: inline-block;
         }
+
         .gallery-thumb {
             width: 108px;
             height: 68px;
             object-fit: cover;
             border-radius: 10px;
             border: 2px solid #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: transform 0.2s, box-shadow 0.2s;
             display: block;
         }
+
         .gallery-thumb:hover {
             transform: scale(1.06);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
         }
+
         .no-image-placeholder {
             width: 108px;
             height: 68px;
@@ -160,8 +184,16 @@
             gap: 4px;
             border: 2px dashed #cbd5e1;
         }
-        .no-image-placeholder i { color: #94a3b8; font-size: 1.2rem; }
-        .no-image-placeholder span { color: #b0bec5; font-size: 0.65rem; }
+
+        .no-image-placeholder i {
+            color: #94a3b8;
+            font-size: 1.2rem;
+        }
+
+        .no-image-placeholder span {
+            color: #b0bec5;
+            font-size: 0.65rem;
+        }
 
         /* ── Name ── */
         .gallery-name {
@@ -170,6 +202,7 @@
             font-size: 0.9rem;
             line-height: 1.4;
         }
+
         .gallery-name-sub {
             color: #94a3b8;
             font-size: 0.75rem;
@@ -195,7 +228,8 @@
             color: #3b5bdb;
             font-weight: 700;
             font-size: 0.75rem;
-            width: 28px; height: 28px;
+            width: 28px;
+            height: 28px;
             border-radius: 7px;
             display: inline-flex;
             align-items: center;
@@ -204,7 +238,8 @@
 
         /* ── Action buttons ── */
         .btn-action {
-            width: 34px; height: 34px;
+            width: 34px;
+            height: 34px;
             border-radius: 8px;
             display: inline-flex;
             align-items: center;
@@ -214,19 +249,23 @@
             transition: all 0.2s;
             cursor: pointer;
         }
+
         .btn-edit-action {
             background: #fff7e6;
             color: #d97706;
         }
+
         .btn-edit-action:hover {
             background: #fde68a;
             color: #b45309;
             transform: translateY(-1px);
         }
+
         .btn-delete-action {
             background: #fff1f2;
             color: #e11d48;
         }
+
         .btn-delete-action:hover {
             background: #fecdd3;
             color: #9f1239;
@@ -234,18 +273,40 @@
         }
 
         /* ── Empty state ── */
-        .empty-state { padding: 64px 20px; text-align: center; }
+        .empty-state {
+            padding: 64px 20px;
+            text-align: center;
+        }
+
         .empty-state-icon {
-            width: 80px; height: 80px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #e0eaff, #f0f4ff);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto 16px;
             box-shadow: 0 4px 16px rgba(59, 91, 219, 0.1);
         }
-        .empty-state-icon i { font-size: 2rem; color: #7c8fc2; }
-        .empty-state h6 { font-weight: 700; color: #334155; margin-bottom: 6px; }
-        .empty-state p { color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; }
+
+        .empty-state-icon i {
+            font-size: 2rem;
+            color: #7c8fc2;
+        }
+
+        .empty-state h6 {
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .empty-state p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
         .btn-empty-add {
             background: linear-gradient(135deg, #1e6fa8, #0ea5e9);
             color: #fff;
@@ -254,14 +315,20 @@
             padding: 10px 22px;
             font-size: 0.86rem;
             font-weight: 600;
-            display: inline-flex; align-items: center; gap: 7px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
             text-decoration: none;
             transition: opacity 0.2s, transform 0.2s;
             box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
         }
-        .btn-empty-add:hover { opacity: 0.9; transform: translateY(-1px); color: #fff; }
-    </style>
 
+        .btn-empty-add:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            color: #fff;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -324,8 +391,7 @@
                                 <td>
                                     @if ($gallery->path)
                                         <div class="gallery-thumb-wrap">
-                                            <img src="{{ Storage::url($gallery->path) }}"
-                                                alt="{{ $gallery->name }}"
+                                            <img src="{{ Storage::url($gallery->path) }}" alt="{{ $gallery->name }}"
                                                 class="gallery-thumb">
                                         </div>
                                     @else
@@ -348,13 +414,11 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('galeri.edit', $gallery) }}"
-                                    class="btn-action btn-edit-action me-1"
-                                    title="Edit">
+                                    <a href="{{ route('galeri.edit', $gallery) }}" class="btn-action btn-edit-action me-1"
+                                        title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <form action="{{ route('galeri.destroy', $gallery) }}"
-                                        method="POST"
+                                    <form action="{{ route('galeri.destroy', $gallery) }}" method="POST"
                                         class="d-inline form-delete-gallery">
                                         @csrf
                                         @method('DELETE')
@@ -398,15 +462,17 @@
                 pageLength: 15,
                 lengthMenu: [10, 15, 25, 50, 100],
                 responsive: true,
-                columnDefs: [
-                    {
+                columnDefs: [{
                         targets: 0,
                         orderable: false,
                         render: function(data, type, row, meta) {
                             return '<span class="row-number">' + (meta.row + 1) + '</span>';
                         }
                     },
-                    { orderable: false, targets: [1, 2, 3, 4] }
+                    {
+                        orderable: false,
+                        targets: [1, 2, 3, 4]
+                    }
                 ]
             });
 

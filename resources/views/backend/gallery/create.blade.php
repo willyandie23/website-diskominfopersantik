@@ -3,7 +3,6 @@
 @section('title', 'Admin - Tambah Gallery')
 
 @push('styles')
-
     <style>
         /* ── Page Header ── */
         .page-header-galeri {
@@ -15,49 +14,63 @@
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(14, 103, 168, 0.22);
         }
+
         .page-header-galeri::before {
             content: '';
             position: absolute;
-            top: -50px; right: -50px;
-            width: 220px; height: 220px;
-            background: rgba(255,255,255,0.06);
+            top: -50px;
+            right: -50px;
+            width: 220px;
+            height: 220px;
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 50%;
         }
+
         .page-header-galeri::after {
             content: '';
             position: absolute;
-            bottom: -70px; right: 100px;
-            width: 160px; height: 160px;
-            background: rgba(255,255,255,0.04);
+            bottom: -70px;
+            right: 100px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 50%;
         }
+
         .page-header-galeri .header-icon-wrap {
-            width: 52px; height: 52px;
-            background: rgba(255,255,255,0.15);
+            width: 52px;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #fff;
             flex-shrink: 0;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .page-header-galeri h4 {
             color: #fff;
             font-weight: 700;
             font-size: 1.3rem;
             margin-bottom: 3px;
         }
+
         .page-header-galeri p {
-            color: rgba(255,255,255,0.72);
+            color: rgba(255, 255, 255, 0.72);
             font-size: 0.87rem;
             margin: 0;
         }
+
         .btn-back {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             color: #fff;
             font-weight: 600;
             font-size: 0.84rem;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             padding: 9px 18px;
             display: inline-flex;
@@ -67,10 +80,12 @@
             text-decoration: none;
             transition: all 0.2s;
             white-space: nowrap;
-            position: relative; z-index: 1;
+            position: relative;
+            z-index: 1;
         }
+
         .btn-back:hover {
-            background: rgba(255,255,255,0.25);
+            background: rgba(255, 255, 255, 0.25);
             color: #fff;
             transform: translateY(-1px);
         }
@@ -79,9 +94,10 @@
         .galeri-card {
             border: none;
             border-radius: 16px;
-            box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.07);
             overflow: visible;
         }
+
         .galeri-card .card-body {
             padding: 28px 32px;
         }
@@ -98,6 +114,7 @@
             align-items: center;
             gap: 8px;
         }
+
         .form-section-title::after {
             content: '';
             flex: 1;
@@ -112,6 +129,7 @@
             color: #374151;
             margin-bottom: 7px;
         }
+
         .form-control {
             border-radius: 10px;
             border: 1.5px solid #e2e8f0;
@@ -120,16 +138,21 @@
             color: #1e293b;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
+
         .form-control:focus {
             border-color: #1e6fa8;
             box-shadow: 0 0 0 3px rgba(30, 111, 168, 0.1);
             outline: none;
         }
+
         .form-control.is-invalid {
             border-color: #e11d48;
             box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.08);
         }
-        .invalid-feedback { font-size: 0.8rem; }
+
+        .invalid-feedback {
+            font-size: 0.8rem;
+        }
 
         /* ── Upload zone ── */
         .upload-zone {
@@ -142,11 +165,13 @@
             background: #f8fafc;
             position: relative;
         }
+
         .upload-zone:hover,
         .upload-zone.dragover {
             border-color: #1e6fa8;
             background: #f0f7ff;
         }
+
         .upload-zone input[type="file"] {
             position: absolute;
             inset: 0;
@@ -155,33 +180,42 @@
             width: 100%;
             height: 100%;
         }
+
         .upload-zone .upload-icon {
-            width: 56px; height: 56px;
+            width: 56px;
+            height: 56px;
             background: linear-gradient(135deg, #dbeafe, #eff6ff);
             border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto 12px;
         }
+
         .upload-zone .upload-icon i {
             font-size: 1.5rem;
             color: #2563eb;
         }
+
         .upload-zone h6 {
             font-weight: 700;
             color: #1e293b;
             font-size: 0.9rem;
             margin-bottom: 4px;
         }
+
         .upload-zone p {
             color: #94a3b8;
             font-size: 0.8rem;
             margin: 0;
         }
+
         .upload-zone .upload-browse {
             color: #1e6fa8;
             font-weight: 600;
             text-decoration: underline;
         }
+
         .upload-zone.is-invalid-zone {
             border-color: #e11d48;
             background: #fff5f7;
@@ -192,7 +226,11 @@
             margin-top: 16px;
             display: none;
         }
-        .preview-section.visible { display: block; }
+
+        .preview-section.visible {
+            display: block;
+        }
+
         .preview-box {
             background: #f8fafc;
             border: 1.5px solid #e2e8f0;
@@ -202,25 +240,30 @@
             align-items: center;
             gap: 16px;
         }
+
         .preview-img {
-            width: 120px; height: 80px;
+            width: 120px;
+            height: 80px;
             object-fit: cover;
             border-radius: 9px;
             border: 2px solid #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             flex-shrink: 0;
         }
+
         .preview-info .preview-filename {
             font-size: 0.85rem;
             font-weight: 600;
             color: #1e293b;
             word-break: break-all;
         }
+
         .preview-info .preview-size {
             font-size: 0.78rem;
             color: #94a3b8;
             margin-top: 3px;
         }
+
         .preview-info .preview-badge {
             display: inline-flex;
             align-items: center;
@@ -233,20 +276,27 @@
             padding: 3px 8px;
             margin-top: 6px;
         }
+
         .btn-remove-preview {
             margin-left: auto;
-            width: 32px; height: 32px;
+            width: 32px;
+            height: 32px;
             border-radius: 8px;
             background: #fff1f2;
             color: #e11d48;
             border: none;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.82rem;
             cursor: pointer;
             transition: all 0.2s;
             flex-shrink: 0;
         }
-        .btn-remove-preview:hover { background: #fecdd3; }
+
+        .btn-remove-preview:hover {
+            background: #fecdd3;
+        }
 
         /* ── Tips card ── */
         .tips-card {
@@ -257,7 +307,11 @@
             box-shadow: none;
             height: 100%;
         }
-        .tips-card .card-body { padding: 24px; }
+
+        .tips-card .card-body {
+            padding: 24px;
+        }
+
         .tips-card-title {
             font-size: 0.78rem;
             font-weight: 700;
@@ -269,25 +323,50 @@
             align-items: center;
             gap: 7px;
         }
+
         .tips-item {
             display: flex;
             align-items: flex-start;
             gap: 10px;
             margin-bottom: 14px;
         }
-        .tips-item:last-child { margin-bottom: 0; }
+
+        .tips-item:last-child {
+            margin-bottom: 0;
+        }
+
         .tips-item-icon {
-            width: 30px; height: 30px;
+            width: 30px;
+            height: 30px;
             border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.82rem;
             flex-shrink: 0;
             margin-top: 1px;
         }
-        .tips-item-icon.blue { background: #dbeafe; color: #2563eb; }
-        .tips-item-icon.green { background: #dcfce7; color: #16a34a; }
-        .tips-item-icon.amber { background: #fef9c3; color: #ca8a04; }
-        .tips-item-icon.purple { background: #ede9fe; color: #7c3aed; }
+
+        .tips-item-icon.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .tips-item-icon.green {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .tips-item-icon.amber {
+            background: #fef9c3;
+            color: #ca8a04;
+        }
+
+        .tips-item-icon.purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
         .tips-item-text strong {
             font-size: 0.82rem;
             font-weight: 700;
@@ -295,6 +374,7 @@
             display: block;
             margin-bottom: 2px;
         }
+
         .tips-item-text span {
             font-size: 0.78rem;
             color: #64748b;
@@ -317,12 +397,14 @@
             transition: all 0.2s;
             cursor: pointer;
         }
+
         .btn-submit-galeri:hover {
             opacity: 0.92;
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(14, 165, 233, 0.38);
             color: #fff;
         }
+
         .btn-cancel-galeri {
             background: #f1f5f9;
             color: #64748b;
@@ -337,12 +419,12 @@
             text-decoration: none;
             transition: all 0.2s;
         }
+
         .btn-cancel-galeri:hover {
             background: #e2e8f0;
             color: #475569;
         }
     </style>
-
 @endpush
 
 @section('content')
@@ -386,7 +468,8 @@
         <div class="col-12 col-xl-8">
             <div class="galeri-card card">
                 <div class="card-body">
-                    <form action="{{ route('galeri.store') }}" method="POST" enctype="multipart/form-data" id="formCreateGaleri">
+                    <form action="{{ route('galeri.store') }}" method="POST" enctype="multipart/form-data"
+                        id="formCreateGaleri">
                         @csrf
 
                         {{-- Nama --}}
@@ -395,16 +478,12 @@
                             <label for="name" class="form-label">
                                 Nama Gallery <span class="text-danger">*</span>
                             </label>
-                            <input type="text"
-                                name="name"
-                                id="name"
-                                class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name') }}"
-                                placeholder="Contoh: Kegiatan Panen Raya 2024"
-                                autocomplete="off"
-                                required>
+                            <input type="text" name="name" id="name"
+                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                placeholder="Contoh: Kegiatan Panen Raya 2024" autocomplete="off" required>
                             @error('name')
-                                <div class="invalid-feedback"><i class="fas fa-exclamation-circle me-1"></i>{{ $message }}</div>
+                                <div class="invalid-feedback"><i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                </div>
                             @enderror
                         </div>
 
@@ -415,11 +494,8 @@
                                 Pilih Gambar <span class="text-danger">*</span>
                             </label>
                             <div class="upload-zone @error('file') is-invalid-zone @enderror" id="uploadZone">
-                                <input type="file"
-                                    name="file"
-                                    id="file"
-                                    accept="image/jpeg,image/png,image/jpg,image/gif,image/svg+xml,image/webp"
-                                    required>
+                                <input type="file" name="file" id="file"
+                                    accept="image/jpeg,image/png,image/jpg,image/gif,image/svg+xml,image/webp" required>
                                 <div class="upload-icon">
                                     <i class="fas fa-cloud-upload-alt"></i>
                                 </div>
@@ -430,7 +506,8 @@
                                 <p class="mt-1">JPG, PNG, WEBP, GIF, SVG &mdash; Maks. 2MB</p>
                             </div>
                             @error('file')
-                                <div class="invalid-feedback d-block"><i class="fas fa-exclamation-circle me-1"></i>{{ $message }}</div>
+                                <div class="invalid-feedback d-block"><i
+                                        class="fas fa-exclamation-circle me-1"></i>{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -445,7 +522,8 @@
                                         <i class="fas fa-check-circle"></i> Siap diupload
                                     </div>
                                 </div>
-                                <button type="button" class="btn-remove-preview" id="btnRemovePreview" title="Hapus pilihan">
+                                <button type="button" class="btn-remove-preview" id="btnRemovePreview"
+                                    title="Hapus pilihan">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
@@ -490,7 +568,8 @@
                         <div class="tips-item-icon amber"><i class="fas fa-weight-hanging"></i></div>
                         <div class="tips-item-text">
                             <strong>Batas Ukuran File</strong>
-                            <span>Maksimum file yang dapat diupload adalah <strong>2MB</strong>. Kompres gambar jika terlalu besar.</span>
+                            <span>Maksimum file yang dapat diupload adalah <strong>2MB</strong>. Kompres gambar jika terlalu
+                                besar.</span>
                         </div>
                     </div>
                     <div class="tips-item">
@@ -510,13 +589,13 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const inputFile       = document.getElementById('file');
-            const uploadZone      = document.getElementById('uploadZone');
-            const previewSection  = document.getElementById('previewSection');
-            const previewImage    = document.getElementById('previewImage');
+            const inputFile = document.getElementById('file');
+            const uploadZone = document.getElementById('uploadZone');
+            const previewSection = document.getElementById('previewSection');
+            const previewImage = document.getElementById('previewImage');
             const previewFilename = document.getElementById('previewFilename');
-            const previewSize     = document.getElementById('previewSize');
-            const btnRemove       = document.getElementById('btnRemovePreview');
+            const previewSize = document.getElementById('previewSize');
+            const btnRemove = document.getElementById('btnRemovePreview');
 
             function formatBytes(bytes) {
                 if (bytes < 1024) return bytes + ' B';
@@ -527,9 +606,9 @@
             function showPreview(file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    previewImage.src    = e.target.result;
+                    previewImage.src = e.target.result;
                     previewFilename.textContent = file.name;
-                    previewSize.textContent     = formatBytes(file.size);
+                    previewSize.textContent = formatBytes(file.size);
                     previewSection.classList.add('visible');
                 };
                 reader.readAsDataURL(file);
@@ -538,7 +617,7 @@
             function resetPreview() {
                 previewSection.classList.remove('visible');
                 previewImage.src = '#';
-                inputFile.value  = '';
+                inputFile.value = '';
             }
 
             inputFile.addEventListener('change', function() {

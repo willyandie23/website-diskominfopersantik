@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    Berita - DISKOMINFOPERSANTIK
+    Berita - DISKOMINFOSANTIK
 @endsection
 
 @push('css')

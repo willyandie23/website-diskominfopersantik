@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{ route('dashboard') }}" class="b-brand text-decoration-none">
-                @if($site_identity->get('logo'))
+                @if ($site_identity->get('logo'))
                     <img src="{{ Storage::url($site_identity->get('logo')) }}" alt="Logo" height="75px">
                 @endif
             </a>
@@ -31,7 +31,8 @@
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{ route('identity.index') }}">Identitas Website</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{ route('identity.index') }}">Identitas
+                                Website</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{ route('banner.index') }}">Banner</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{ route('news.index') }}">Berita</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{ route('download.index') }}">Unduhan</a></li>
@@ -47,7 +48,8 @@
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{ route('structure-organization.index') }}">Daftar Anggota</a></li>
+                        <li class="pc-item"><a class="pc-link"
+                                href="{{ route('structure-organization.index') }}">Daftar Anggota</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{ route('field.index') }}">Bidang Kantor</a></li>
                     </ul>
                 </li>
@@ -71,7 +73,8 @@
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{ route('katalog-layanan.index') }}">Layanan</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{ route('katalog-layanan.index') }}">Layanan</a>
+                        </li>
                         <li class="pc-item"><a class="pc-link" href="{{ route('katalog-faq.index') }}">FAQ</a></li>
                     </ul>
                 </li>
@@ -84,17 +87,17 @@
                 </li>
 
                 <!-- Hanya Superadmin -->
-                {{-- @hasrole('superadmin')
+                @hasrole('superadmin')
                     <li class="pc-item pc-caption">
                         <label>Manajemen Aplikasi</label>
                     </li>
-                    <li class="pc-item {{ request()->is('app-logs*') ? 'active' : '' }}">
-                        <a href="{{ url('app-logs') }}" class="pc-link">
+                    <li class="pc-item {{ request()->is('app-log.index') ? 'active' : '' }}">
+                        <a href="{{ route('app-log.index') }}" class="pc-link">
                             <span class="pc-micon"><i class="ti ti-receipt"></i></span>
                             <span class="pc-mtext">Log Aktivitas</span>
                         </a>
                     </li>
-                @endhasrole --}}
+                @endhasrole
 
             </ul>
         </div>

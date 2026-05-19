@@ -1,4 +1,5 @@
 @extends('backend.layouts.app')
+
 @section('title', 'Admin - Identitas Website')
 
 @push('css')
@@ -116,15 +117,15 @@
 
                         <hr class="my-4">
 
-                        {{-- MEDIA SOSIAL --}}
+                        {{-- MEDIA SOSIAL + YOUTUBE --}}
                         <div class="section-divider">
                             <h6 class="text-uppercase text-muted fw-bold mb-0" style="font-size:.8rem">
-                                <i class="ti ti-brand-instagram me-1"></i> Media Sosial
+                                <i class="ti ti-brand-instagram me-1"></i> Media Sosial & Video
                             </h6>
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6 mb-3 mb-md-0">
+                            <div class="col-md-4 mb-3 mb-md-0">
                                 <label class="form-label fw-semibold">Instagram</label>
                                 <span class="key-badge ms-1">instagram</span>
                                 <div class="input-group">
@@ -138,7 +139,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4 mb-3 mb-md-0">
                                 <label class="form-label fw-semibold">Facebook</label>
                                 <span class="key-badge ms-1">facebook</span>
                                 <div class="input-group">
@@ -151,6 +152,21 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">URL Video YouTube</label>
+                                <span class="key-badge ms-1">youtube_url</span>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="ti ti-brand-youtube"></i></span>
+                                    <input type="url" name="youtube_url"
+                                        class="form-control @error('youtube_url') is-invalid @enderror"
+                                        placeholder="https://youtu.be/xxxxxxxxxx"
+                                        value="{{ old('youtube_url', $identities['youtube_url'] ?? '') }}">
+                                    @error('youtube_url')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <small class="text-muted">Contoh: https://youtu.be/abc123xyz</small>
                             </div>
                         </div>
 
@@ -254,6 +270,7 @@
                                         'favicon' => 'Favicon',
                                         'instagram' => 'Instagram',
                                         'facebook' => 'Facebook',
+                                        'youtube_url' => 'Video YouTube',
                                         'office_address' => 'Alamat',
                                         'office_phone' => 'No. HP',
                                         'office_email' => 'Email',
@@ -335,11 +352,9 @@
             const reader = new FileReader();
 
             reader.onload = function(e) {
-                // Jika preview sudah berupa img, update src-nya
                 if (preview.tagName === 'IMG') {
                     preview.src = e.target.result;
                 } else {
-                    // Ganti div placeholder dengan img
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.id = previewId;

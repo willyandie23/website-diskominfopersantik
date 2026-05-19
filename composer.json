@@ -9,6 +9,7 @@
         "php": "^8.3",
         "darkaonline/l5-swagger": "^11.0",
         "diglactic/laravel-breadcrumbs": "^10.1",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^13.0",
         "laravel/passport": "^13.0",
         "laravel/tinker": "^3.0",

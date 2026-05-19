@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    Keluhan - DISKOMINFOPERSANTIK
+    Keluhan - DISKOMINFOSANTIK
 @endsection
 
 @push('css')
@@ -617,9 +617,7 @@
                                             <td>{{ $item->requester_name }}</td>
                                             <td>{{ $item->unit_name }}</td>
                                             <td>
-                                                <a href="{{ route('frontend.cases.show', $item->id) }}" class="text-primary fw-semibold">
-                                                    {{ $item->title }}
-                                                </a>
+                                                {{ $item->title }}
                                             </td>
                                             <td>
                                                 @php
@@ -630,7 +628,7 @@
                                             <td>
                                                 @php
                                                     $statusOption = $statuses->firstWhere('value', $item->status);
-                                                    $badgeColor = match($item->status) {
+                                                    $badgeColor = match ($item->status) {
                                                         'sent' => '#3b82f6',
                                                         'on_progress' => '#f59e0b',
                                                         'done' => '#10b981',
@@ -638,7 +636,8 @@
                                                         default => '#64748b',
                                                     };
                                                 @endphp
-                                                <span class="badge" style="background:{{ $badgeColor }}; font-size:11px; padding:5px 10px; border-radius:6px;">
+                                                <span class="badge"
+                                                    style="background:{{ $badgeColor }}; font-size:11px; padding:5px 10px; border-radius:6px;">
                                                     {{ $statusOption ? $statusOption->label : ucfirst($item->status) }}
                                                 </span>
                                             </td>
@@ -693,7 +692,7 @@
                             <p class="text-muted mb-3" style="font-size:13px;">
                                 Jika mengalami kendala dalam pengisian form, hubungi kami melalui:
                             </p>
-                            <a href="https://wa.me/628115221321" target="_blank"
+                            <a href="https://wa.me/{{ $site_identity->get('office_phone') }}" target="_blank"
                                 class="btn d-flex align-items-center justify-content-center gap-2 w-100"
                                 style="background:#25D366; color:#fff; border-radius:10px; font-weight:600; font-size:14px;">
                                 <i class="fab fa-whatsapp" style="font-size:18px;"></i>
@@ -759,7 +758,9 @@
                         },
                         pageLength: 10,
                         responsive: true,
-                        order: [[0, 'asc']]
+                        order: [
+                            [0, 'asc']
+                        ]
                     });
                 }
             }

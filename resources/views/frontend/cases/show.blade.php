@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    Tiket #{{ $case->id }} - Keluhan DISKOMINFOPERSANTIK
+    Tiket #{{ $case->id }} - Keluhan DISKOMINFOSANTIK
 @endsection
 
 @push('css')

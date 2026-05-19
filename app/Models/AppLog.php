@@ -3,21 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use OpenApi\Annotations as OA;
-
-/**
- * Class AppLog.
- *
- * @author  Willyandie S. <willyandie.sc@gmail.com>
- *
- * @OA\Schema(
- *     description="AppLog model",
- *     title="AppLog model",
- *     @OA\Xml(
- *         name="AppLog"
- *     )
- * )
- */
 
 class AppLog extends Model
 {
